@@ -1,4 +1,5 @@
 ---
+title: "Cleaning of the Melastomataceae probe set for target enrichment"
 output: github_document
 ---
 
@@ -23,9 +24,18 @@ knitr::opts_chunk$set(collapse  = TRUE,
 <!-- badges: end -->
 
 
-Research Compendium of the project **{{ PLEASE ADD A FEW WORDS }}**
+Cleaning of the probe set. ADD DETAILS HERE.
 
 
+> **Definitions**:
+>
+> - **Melasto384** means the full Melastomataceae 384 probe set (i.e. 689 template sequences). It is divided into 4 subsets of loci:
+>   - **angio353** (with small **a**) loci (or template sequences) means the loci (template sequences) that come from the Angiosperms 353 probe set but that are in the Melastomataceae 384 probe set
+>   - **markerminer**
+>   - **functional_extra**
+>   - **RM2016**
+> - **full Angio353** means all the loci that are in the original Angiosperms 353 probe set
+ 
 
 ### How to cite
 
