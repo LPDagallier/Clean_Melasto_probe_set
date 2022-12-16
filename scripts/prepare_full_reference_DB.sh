@@ -8,7 +8,7 @@
 #SBATCH --ntasks-per-node=1
 #SBATCH --mem=16gb 
 #SBATCH --time=24:00:00
-#SBATCH --mail-user=ldagallier@nybg.org
+#SBATCH --mail-user=<insert email>
 #SBATCH --mail-type=ALL
 ############################################################
 
