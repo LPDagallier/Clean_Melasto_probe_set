@@ -74,6 +74,9 @@ locus_matching_table_CUSTOM.csv
     [Biostrings](https://bioconductor.org/packages/release/bioc/html/Biostrings.html))
 -   [Python 3.10](https://www.python.org/downloads/release/python-3100/)
 -   [HybPiper 2.0.1](https://github.com/mossmatters/HybPiper)
+-   [AliView](https://ormbunkar.se/aliview/)
+-   [Muscle v3.8.425](https://drive5.com/muscle/) (as wrapped in
+    AliView)
 
 <details>
 <summary>
@@ -141,9 +144,9 @@ bicolor* and *Medinilla magnifica*, respectively) from the 1KP project.
 
 ### 1.1 Retrieve the sequences
 
-Download SWGX and WWQZ data from the 1KP project (updated release):
-<https://dx.doi.org/10.5524/100910>, and decompress (unzip) the files
-into `$path_to_wd/prepare1KP`. We will use of the
+Download SWGX and WWQZ data from the [1KP project (updated
+release)](https://dx.doi.org/10.5524/100910), and decompress (unzip) the
+files into `$path_to_wd/prepare1KP`. We will use of the
 `XXXX-translated-protein.fa` and `XXXX-translated-nucleotides.fa` fasta
 files.
 
@@ -809,10 +812,9 @@ similarity with a sequence of any other locus.
 
 ## 1. Prepare the raw target sequences set (Melasto689)
 
-Download
-(<https://datadryad.org/stash/dataset/doi:10.5061/dryad.8931zcrm2>) or
-copy the original target sequence set, and decompress the
-`Template_sequences.zip` folder.
+Download or copy the [original Melastomataceae 689 target sequence
+set](https://datadryad.org/stash/dataset/doi:10.5061/dryad.8931zcrm2),
+and decompress the `Template_sequences.zip` folder.
 
 -   De-align the sequences
 -   Remove all the ? characters
