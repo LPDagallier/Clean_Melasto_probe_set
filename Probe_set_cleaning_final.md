@@ -3,6 +3,16 @@ Cleaning of the Melastomataceae 384 probe set for target enrichment
 
 # Title TO REMOVE
 
+TO DO:
+
+-   go throughout the text and check for coherence
+-   add the relevant files in the folders for the different steps (avoid
+    heavy files)
+-   OK develop the Readme (including a link to clean probe set .FNA and
+    .FAA)
+-   find a way to maybe lock the other PROBE_SET_CLEANING folder to
+    avoid doublons
+
 The basic idea of this cleaning is to build a set of reference sequences
 and to align every template sequence from Melasto689 to this set of
 references, correcting the frame, reverse-complementing if needed, and
