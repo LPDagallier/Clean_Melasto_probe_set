@@ -1,44 +1,57 @@
-Cleaning of the Melastomataceae 384 probe set for target enrichment
+Cleaning of the Melastomataceae 689 probe set for target enrichment
 ================
 
 # Title TO REMOVE
 
 TO DO:
 
--   go throughout the text and check for coherence
--   add the relevant files in the folders for the different steps (avoid
-    heavy files)
+-   OK go throughout the text and check for coherence
+-   OK add the relevant files in the folders for the different steps
+    (avoid heavy files)
 -   OK develop the Readme (including a link to clean probe set .FNA and
     .FAA)
+-   add statement that this probe set is only for bioinformatic use
+-   add statement that not all intermediate files are in the repo
+    (mainly heavy files like selfblast results)
 -   find a way to maybe lock the other PROBE_SET_CLEANING folder to
     avoid doublons
 
-The basic idea of this cleaning is to build a set of reference sequences
-and to align every template sequence from Melasto689 to this set of
-references, correcting the frame, reverse-complementing if needed, and
-removing stop codons and poorly aligned regions. The cleaned Melasto689
+**Files to provide \[TO CHECK\]** custom_TS_correction.sh
+align_translated_to_ref_and_draw_consensus.R (add package dependency in
+dependency list) select_file_Myrtales.txt
+locus_matching_table_CUSTOM.csv
+
+The basic idea of the cleaning process is to build a set of reference
+sequences and to align every template sequence from Melasto689 to this
+set of references, correcting the frame, reverse-complementing if
+needed, and removing stop codons and poorly aligned regions. The cleaned
 template sequences are then associated to the reference sequences they
 matched into a final sequence set. Finally, the final sequence set go
 through different checks and fine-tuned cleaning.
 
-The cleaning will be divided in 3 main steps:  
+The process will be divided in 3 main steps:  
 - **Step 1**: build the set of reference sequences  
 - **Step 2**: align and associate the Melasto689 template sequences to
-the set of reference  
-- **Step 3**: final checks and fine-tuned cleaning: extra steps to make
-sure the sequences are clean
+the set of reference into a final sequence set - **Step 3**: final
+checks and fine-tuned cleaning: extra steps to make sure the sequences
+are clean
 
 **Directory organization**  
-For simplicity, all the following code assumes analyses are run in a
-single directory `$path_to_wd`. This directory is divided in 4
-sub-directory:
+For simplicity, all the following assumes analyses are run in a single
+directory `$path_to_wd`. This directory is divided in 6 sub-directory:
 
--   prepare1KP (Step 1: 1.)
--   prepare_mega353 (Step 1: 2.)
--   full_reference_DB (Step 1: 3.)
--   original_template_sequences (Step 2: 1.)
--   melasto689_on_full_ref (Step 2: 2.)
--   CLEAN_PROBE_SET (Step 3)
+-   `prepare1KP` (Step 1: 1. - Prepare the 1KP transcriptomes reference
+    sequences set)
+-   `prepare_mega353` (Step 1: 2. - Prepare the mega353 reference
+    sequences set)
+-   `full_reference_DB` (Step 1: 3. - Merge the two previous reference
+    sequences set)
+-   `original_template_sequences` (Step 2: 1. - Prepare the original
+    Melast689 template sequence set)
+-   `melasto689_on_full_ref` (Step 2: 2. - Align and associate the
+    Melasto689 template sequences to the set of reference)
+-   `CLEAN_PROBE_SET` (Step 3 - Contains the final and cleaned probe
+    set)
 
 ``` bash
 cd $path_to_wd
@@ -51,27 +64,23 @@ mkdir CLEAN_PROBE_SET
 ```
 
 **Naming convention**  
-Sequences names follow the convention used in many probe set and
-programs (e.g. Angio353, HybPiper, Captus, SECAPR). The name of a
-sequence is composed of the template sequence ID (generally identifying
-the taxon from which the sequence initially come from, sometimes with
-additional info) and the locus name separated by an hyphen,
-e.g. `>template_sequence_ID-locusID`
+Sequences names follow the convention used in many probe sets for
+targeted sequencing and associated programs (e.g. Angio353, HybPiper,
+Captus, SECAPR). The name of a sequence is composed of the template
+sequence ID (generally identifying the taxon from which the sequence
+initially come from, sometimes with additional info) and the locus name
+separated by an hyphen, e.g. `>template_sequence_ID-locusID`
 
 **Scripts**
 
 Every step of the cleaning process is presented and explained in detail
 below. The command are presented as if run in interactive mode. For some
 steps, the running time is long and was actually not achieved in
-interactive mode, but using `.sh` scripts on a computing cluster that
-uses the SLURM manager (`sbatch` command). The `.sh` scripts are made
-available here and a note is present at the beginning of each step
-specifying which script to refer to.
-
-**Files to provide \[TO CHECK\]** custom_TS_correction.sh
-align_translated_to_ref_and_draw_consensus.R (add package dependency in
-dependency list) select_file_Myrtales.txt
-locus_matching_table_CUSTOM.csv
+interactive mode, but using `.sh` scripts ( scripts were run on a
+computing cluster that uses the SLURM manager, `sbatch` command). The
+`.sh` scripts are made available in this repository and a statement is
+present at the beginning of each step specifying which script to refer
+to.
 
 **Dependencies**
 
@@ -87,12 +96,6 @@ locus_matching_table_CUSTOM.csv
 -   [AliView](https://ormbunkar.se/aliview/)
 -   [Muscle v3.8.425](https://drive5.com/muscle/) (as wrapped in
     AliView)
-
-<details>
-<summary>
-GLOSSARY
-</summary>
-<p>
 
 **Glossary**:
 
@@ -123,9 +126,6 @@ GLOSSARY
     set or final sequence set; in the sequence set, a same locus can
     have several template sequences
 
-</p>
-</details>
-
 # Step 1: build the set of reference sequences
 
 The set of reference is composed of
@@ -137,20 +137,21 @@ project](https://sites.google.com/a/ualberta.ca/onekp/?pli=1).
 The set of reference sequence will contain different sequences. The
 sequences will be grouped under different “loci” based on their
 similarity. During the process of building the set of references, a
-temporary locus name (sometimes referred as `locusCustomID`) will be
-assigned to the loci in the form `LOC######`, where `#` represents a
-digit (e.g. `LOC12345`). This `locusCustomID` will be used as locus name
-for most of the sequences during the whole cleaning process, but the
-loci names will be reverted to their “old” names (i.e. the names used in
-Angio353 and Melasto689) in Step 3: 3.
+temporary locus name (sometimes referred as `*locusCustomID*`) will be
+assigned to the loci in the form `LOC#####` (where `#` represents a
+digit, e.g. `LOC12345`). This `*locusCustomID*` will be used as locus
+name for most of the sequences during the whole cleaning process, but
+the loci names will be reverted to their “old” names (i.e. the names
+used in Melasto689 and Angio353) in Step 3: 3.
 
 ## 1. Prepare the 1KP transcriptomes reference database
 
 > The `sbatch` script corresponding to this section is:
 > [`prepare_1KP_DB.sh`](scripts/prepare_1KP_DB.sh)
 
-We will use the 2 Melastomataceae samples SWGX and WWQZ (*Tetrazygia
-bicolor* and *Medinilla magnifica*, respectively) from the 1KP project.
+We will use the transcriptomes of the two Melastomataceae samples
+present in the 1KP project dataset: SWGX and WWQZ (*Tetrazygia bicolor*
+and *Medinilla magnifica*, respectively).
 
 ### 1.1 Retrieve the sequences
 
@@ -163,7 +164,7 @@ files.
 ### 1.2 Group the sequences according to their ortholog group
 
 Sequences in the SWGX and WWQZ data have a unique identifier (referred
-as transcriptSequencesID), in the form
+as `transcriptSequencesID`), in the form
 `>scaffold-XXXX-2#######-Genus_species`, where XXXX is either SWGX or
 WWQZ, \# represents a digit, and Genus_species is either
 Tetrazygia_bicolor (SWGX) or Medinilla_magnifica (WWQZ),
@@ -172,8 +173,10 @@ e.g. `>scaffold-WWQZ-2000004-Medinilla_magnifica`.
 The sequences need to be grouped according to their ortholog group. To
 do so, we’ll use the 2<sup>nd</sup> column in the
 `XXXX-translated-reference-names.tsv` files, containing the gene
-identifiers according to OrthoFinder (see publication of 1KP), referred
-as locusOrthologID. The identifier is in the form
+identifiers according to OrthoFinder (see [One Thousand Plant
+Transcriptomes Initiative
+(2019)](https://doi.org/10.1038/s41586-019-1693-2), referred as
+`locusOrthologID`. The identifier is in the form
 “gi\|255582030\|ref\|XP_002531812.1\|”.
 
 -   get the list of the unique orthogroup identifiers from the
@@ -186,9 +189,9 @@ cd $path_to_wd/prepare1KP
 cat SWGX-translated-reference-names.tsv WWQZ-translated-reference-names.tsv | awk '{print $2}' | sort | uniq > orthoIDs_list.txt # get the list of the unique gene identifiers according to OrthoFinder
 ```
 
--   append a unique custom locus name (locusCustomID) in the form
-    LOC##### to every orthogroup (locusOrthologID) and store them in the
-    array `$loc_list`. The array contains locus names in the form
+-   append a unique custom locus name (*`locusCustomID`*) in the form
+    LOC##### to every orthogroup (*`locusOrthologID`*) and store them in
+    the array `$loc_list`. The array contains locus names in the form
     `locusOrthologID__locusCustomID`.
 
 ``` bash
@@ -197,7 +200,8 @@ loc_list=$(cat orthoIDs_list.txt | awk '{ printf $1"__LOC" "%05d\n", ++a }') # a
 
 -   create a folder called `orthogroups` and initialize the files:
     -   `ortho_loci_table.txt`: will contain the correspondance between
-        locusCustomID, locusOrthologID and transcriptSequencesID
+        *`locusCustomID`*, *`locusOrthologID`* and
+        *`transcriptSequencesID`*
     -   `SWGX-WWQZ-translated-nucleotides-grouped.FNA`: will contain the
         transcriptome sequences, grouped by custom locus ID
     -   `SWGX-WWQZ-translated-prot-grouped.FAA`: will contain the
@@ -211,17 +215,19 @@ echo locusCustomID locusOrthologID transcriptSequencesID > orthogroups/ortho_loc
 ```
 
 -   for every locus name in the list of loci `$loc_list`:
-    -   define \$locID as the custom locus ID (locusCustomID)
-    -   define \$orthoID as the orthogroup ID (locusOrthologID)
-    -   retrieve the transcriptSequencesID(s) corresponding to the
-        locusOrthologID in SWGX and WWQZ databases
-    -   if transcriptSequencesID(s) were retrieved:
+    -   define \$locID as the custom locus ID (*`locusCustomID`*)
+    -   define \$orthoID as the orthogroup ID (*`locusOrthologID`*)
+    -   retrieve the `transcriptSequencesID`(s) corresponding to the
+        *`locusOrthologID`* in SWGX and WWQZ databases
+    -   if `transcriptSequencesID`(s) were retrieved:
         -   extract the sequence(s) from the databases, append the
-            custom locus ID (locusCustomID) to its name, and append the
-            renamed sequence to
-            ``` SWGX-WWQZ-translated-nucleotides-grouped.FNA`` and ```SWGX-WWQZ-translated-prot-grouped.FAA\`\`
+            custom locus ID (*`locusCustomID`*) to its name, and append
+            the renamed sequence to
+            `SWGX-WWQZ-translated-nucleotides-grouped.FNA` and
+            `SWGX-WWQZ-translated-prot-grouped.FAA`
     -   populate the `ortho_loci_table.txt` with the corresponding
-        locusCustomID, locusOrthologID and transcriptSequencesID
+        *`locusCustomID`*, *`locusOrthologID`* and
+        *`transcriptSequencesID`*
 
 ``` bash
 for name in $loc_list;
@@ -313,8 +319,8 @@ cat different_query_and_subject_loci_SB1.csv | csvtk filter2 -H -f '$3 > 60 && $
 ```
 
 Some of the sequences with high similarity were assigned to different
-orthogroups. We will thus group these sequences, which mean grouping the
-“homologous” loci.
+orthogroups. We will thus group these sequences, which mean grouping
+some supposedly ortholog loci.
 
 ### 1.3 Group loci with high sequence similarity
 
@@ -336,15 +342,18 @@ A locus can have high sequence similarity with more than one other
 locus, we need to retrieve all the loci associations, and print them in
 a similarity table (`selfblast_table.txt`).
 
-For every locus in the list of loci from the pairs of loci: - retrieve
-the other locus (loci) it matches to, and arrange them into a list -
-search if any of the locus in the list is already in the table
-`selfblast_table.txt` - if none of the locus is in the similarity table,
-then append the list at the end of the table - if any of the locus is
-found in the similarity table, then extract the matching list of loci in
-the similarity table, append the list to the extracted list, remove
-duplicates loci and replace the original list with the newly generated
-list
+For every locus in the list of loci from the pairs of loci:
+
+-   retrieve the other locus (loci) it matches to, and arrange them into
+    a list
+-   search if any of the locus in the list is already in the table
+    `selfblast_table.txt`
+-   if none of the locus is in the similarity table, then append the
+    list at the end of the table
+-   if any of the locus is found in the similarity table, then extract
+    the matching list of loci in the similarity table, append the list
+    to the extracted list, remove duplicates loci and replace the
+    original list with the newly generated list
 
 ``` bash
 query_list=$(cat pairs_SB1.csv | awk -F ',' '{print $1}' | sort | uniq)
@@ -473,19 +482,23 @@ sequences according to the group of interest. Here we will filter the
 mega353 dataset to keep the sequences from the samples in the Myrtales
 order.
 
-Download the NewTarget directory from
+Download the NewTargets directory from
 <https://github.com/chrisjackson-pellicle/NewTargets> and unzip the
-files. Store the `NewTarget` folder into `$path_to_wd/prepare_mega353`.
+files. Store the `NewTargets` folder into `$path_to_wd/prepare_mega353`.
 
 A filtering text file is created, in order to filter on the Myrtales
-order (`select_file_Myrtales.txt`).
+order
+([`select_file_Myrtales.txt`](prepare_mega353/select_file_Myrtales.txt)).
 
 The `filter_mega353.py` script is then run.
 
 ``` bash
-cd $path_to_wd/prepare_mega353/NewTarget
+cd $path_to_wd/prepare_mega353/NewTargets
 python filter_mega353.py mega353.fasta select_file_Myrtales.txt -filtered_target_file ../mega353_Myrtales.fa
 ```
+
+The mega353 reference sequences set used is the
+[`mega353_Myrtales.fa`](prepare_mega353/mega353_Myrtales.fa) file.
 
 ## 3. Associate the transcriptome and mega353 references databases into a single set
 
@@ -506,10 +519,10 @@ path_to_onekp=$path_to_wd/prepare1KP;
 Angio353_FNA=$path_to_wd/prepare_mega353/mega353_Myrtales.fa;
 ```
 
-Copy the transcriptome reference databases in the current directory into
-the `FULL_REFERENCE_nucl.FNA` and `FULL_REFERENCE_prot.FAA` files.
-Sequences from the mega353 database will later be appended to these
-files.
+Concatenate the transcriptome reference databases in the current
+directory into the `FULL_REFERENCE_nucl.FNA` and
+`FULL_REFERENCE_prot.FAA` files. Sequences from the mega353 database
+will be appended to these files.
 
 ``` bash
 cat $path_to_wd/prepare1KP/orthogroups/SWGX-WWQZ-translated-nucleotides-grouped_SB1.FNA > FULL_REFERENCE_nucl.FNA
@@ -538,7 +551,7 @@ prot_DB=$path_to_wd/prepare1KP/BLAST_custom_DB/SWGX-WWQZ_protein_grouped_SB1_BLA
 ### 3.2 Associate mega353 loci with SWGX and WWQZ transcriptomes
 
 Extract the list of mega353 loci in a text file. Initialize matching
-table between mega353 loci and custom locus ID (locusCustomID).
+table between mega353 loci and custom locus ID (*`locusCustomID`*).
 
 ``` bash
 cd $path_to_wd/full_reference_DB
@@ -563,22 +576,22 @@ For each locus in the list of mega353 loci:
         the query covers the subject sequence)
 -   if the filtered .csv file exists and is not empty (i.e. matching
     sequences remain after filtering), then:
-    -   extract the customLocusID(s) from the matching sequence(s)
-    -   if more than 1 customLocusID were found, then:
+    -   extract the *`customLocusID`*(s) from the matching sequence(s)
+    -   if more than 1 *`customLocusID`* were found, then:
         -   print a warning
         -   append the locus sequences to the full reference database as
             they are (no renaming)
         -   print the mega353 locus name and the mention
             “multiplematches” to the matching table
-    -   else (i.e. only 1 customLocusID was found), then:
+    -   else (i.e. only 1 *`customLocusID`* was found), then:
         -   rename the locus sequence so that the mega353 locus name
             (4-digit sequence) is enclosed in 2 \_\_ (double underscore)
-            and moved to the sequence ID, and so that the customLocusID
-            is appended at the end of the sequence
+            and moved to the sequence ID, and so that the
+            *`customLocusID`* is appended at the end of the sequence
         -   append the renamed locus sequence to the full reference
             database
-        -   print the mega353 locus name and its customLocusID to the
-            matching table
+        -   print the mega353 locus name and its *`customLocusID`* to
+            the matching table
 -   else (i.e. no matching sequences remain after filtering), then:
     -   append the locus sequences to the full reference database as
         they are (no renaming)
@@ -669,7 +682,7 @@ cat different_query_and_subject_loci.csv | csvtk filter2 -H -f '$3 > 60 && $4 > 
 
 ### 3.5 Associate the loci having sequences with high similarity
 
-Highly similar sequences from different loci were found, the loci have
+Highly similar sequences from different loci were found, these loci have
 to be grouped under the same name.
 
 #### 3.5.1 Build a similarity table
@@ -762,8 +775,8 @@ cat selfblast_table_paired.txt | grep ',[[:digit:]]\{4\}$' | awk -F ',' '{print 
 cat selfblast_table_paired.txt | grep -v ',[[:digit:]]\{4\}$' | awk -F ',' '{print $2"\t"$1}' >> replacement.txt
 ```
 
-Use `seqkit replace` to replace every correspondingLocus to its matching
-*`locusCustomID`*.
+Use `seqkit replace` to replace every *`correspondingLocus`* to its
+matching *`locusCustomID`*.
 
 ``` bash
 seqkit replace -w0 -p '-(.+)$' -r '-{kv}' -k replacement.txt --keep-key FULL_REFERENCE_prot.FAA | seqkit replace -w0 -p '-_' -r '_' > FULL_REFERENCE_prot_SB1.FAA
@@ -810,15 +823,13 @@ The file `check_filtered_different_query_and_subject_loci.csv` resulting
 from the check self-BLAST is empty, meaning no sequence from a locus has
 similarity with a sequence of any other locus.
 
-> **The full set of reference sequences is ready** In
-> `$path_to_wd/full_reference_DB`: `FULL_REFERENCE_nucl_SB1.FNA` and
-> `FULL_REFERENCE_prot_SB1.FAA`
+**The full set of reference sequences is ready**
+in`$path_to_wd/full_reference_DB`:
+[`FULL_REFERENCE_nucl_SB1.FNA`](full_reference_DB/FULL_REFERENCE_nucl_SB1.FNA.gz)
+and
+[`FULL_REFERENCE_prot_SB1.FAA`](full_reference_DB/FULL_REFERENCE_prot_SB1.FAA.gz)
 
 # Step 2: align the Melasto689 template sequences to the set of reference
-
-> **The full set of reference sequences is ready** In
-> `$path_to_wd/full_reference_DB`: `FULL_REFERENCE_nucl_SB1.FNA` and
-> `FULL_REFERENCE_prot_SB1.FAA`
 
 ## 1. Prepare the raw target sequences set (Melasto689)
 
@@ -844,10 +855,11 @@ KT377070.1 and KT377086.1 are each split into 2 different files
 (`KT377070.1_alignment.fasta` and `KT377070_alignment.fasta`, and
 `KT377086.1_alignment.fasta` and `KT377086-Affzeli.fasta`,
 respectively), supposedly representing 2 different “versions” of the
-genes with high divergence. Actually, the alternative “version” is not
-highly divergent but in reverse complement of what it should be. Here we
-just merge the fasta files in order to have only 1 file per gene. We
-arbitrarily keep the “.1” suffix in the names of the genes.
+genes with high divergence (Jantzen, pers. comm.). Actually, the
+alternative “version” is not highly divergent but in reverse complement
+of what it should be. Here we just merge the fasta files in order to
+have only 1 file per gene. We arbitrarily keep the “.1” suffix in the
+names of the genes.
 
 **KT377070.1**  
 To avoid duplicates in fasta headers, we rename the sequence
@@ -897,7 +909,7 @@ rm *.fasta
 cat *.FNA > ../Melastomataceae_689_original.FNA
 ```
 
-## 2. Associate each template sequence (or portion of) from Melasto689 to a locus from FULL_REFERENCE
+## 2. Associate each template sequence (or portion of) from Melasto689 to a locus from the full reference set
 
 > The `sbatch` script corresponding to this section is:
 > [`melasto689_on_full_reference.sh`](scripts/melasto689_on_full_reference.sh)
@@ -914,7 +926,7 @@ prot_DB=$path_to_full_ref/FULL_REFERENCE_BLAST_DB/FULL_REFERENCE_prot_BLAST_DB_F
 path_to_scripts=$path_to_scripts # define the path to the scripts
 ```
 
-Copy the necessary files.
+Copy the necessary files to the current directory.
 
 ``` bash
 scp -r $path_to_Melasto689 ./
@@ -924,9 +936,10 @@ scp -r $path_to_full_ref/FULL_REFERENCE_nucl.FNA ./
 ### 2.2 Remove the Angio353 template sequences from Melasto689
 
 The Melasto389 probe set includes template sequences from the Angio353
-dataset (what we call angio353 (with a small *a* in the glossary). They
-need to be removed beforehand. They are easily identifiable with their
-name in the form `XXXX-####` where `X` is a letter and `#` a digit.
+dataset (what we call angio353, with a small **a**, in the glossary).
+They need to be removed beforehand. They are easily identifiable with
+their name in the form `XXXX-####` where `X` is a letter and `#` a
+digit.
 
 ``` bash
 cd $path_to_wd/melasto689_on_full_ref
@@ -938,11 +951,11 @@ seqkit seq -n Melasto689_trimed.FNA > template_sequences_list.txt
 
 ### 2.3 Align every template sequence to the reference and extract the hits
 
-Every template sequence (TS) from Melasto689 (Melasto689_trimmed) will
-be aligned to the set of references designed in Step 1. The aligner used
-here is `BLAST` (`blastx-fast`). The regions of the TS that match to a
-reference (the hits) are then extracted, the name pf the reference locus
-is appended to them, and they are place into the `extracted_hits`
+Every template sequence (TS) from Melasto689 (`Melasto689_trimed.FNA`)
+will be aligned to the set of references designed in Step 1. The aligner
+used here is `BLAST` (`blastx-fast`). The regions of the TS that match
+to a reference (the hits) are then extracted, the name of the reference
+locus is appended to them, and they are place into the `extracted_hits`
 folder. The non-matching regions are also separated into the `NMR_hits`
 folder, and the TS with no match (i.e. no portion of the TS matches a
 reference) are placed into the `nomatch_TS` folder.
@@ -956,7 +969,7 @@ mkdir nomatch_TS
 mkdir NMR_hits
 ```
 
-For every TS in Melasto689_trimmed:
+For every TS in the list of template sequences:
 
 -   create a sub-directory and set it as current directory
 -   extract the TS from the whole Melasto689_trimmed file
@@ -1194,13 +1207,15 @@ individual files with cleaned hits.
 
 ### 2.5 Add reference sequences to the final set
 
-This step aims to add to the final probe set the reference sequences
-from the loci that matched the TS in 2.3. For some loci, the number of
-reference sequences coming from the transcriptome dataset is very high.
-So instead of appending them all to the final set, we just select the
-transcriptome reference sequences that aligned to a TS. On the other
-hand, for the loci in the final set, we append all the reference
-sequences coming from the Angio353 (mega353) dataset.
+This step aims to add the relevant reference sequences (RS) to the final
+probe set. We will only add the RS from loci that matched the TS in
+2.3.  
+Some loci have a very high number of transcriptome RS. Instead of
+appending them all to the final set, we just select the transcriptome RS
+that previously aligned to a TS.  
+Concerning the Angio353 RS, no selection was carried out and all of them
+were appended to the final set, if belonging to a locus present in the
+final set.
 
 -   create the `cleaned_sequences_set` folder
 -   concatenate all the cleaned hit `.FNA` files into the file
@@ -1285,10 +1300,10 @@ cd $path_to_wd/melasto689_on_full_ref/cleaned_sequences_set
 seqkit seq -n ../Angio353_from_Melasto689.FNA | sed 's/.*-//g' | sort | uniq > Angio353_from_Melasto689_list.txt
 ```
 
-For every locus in the list of angio353 loci: - retrieve the sequences
-from the reference set that belong to the locus (i.e. either having it
-as locus name or having it in their TS name) and store them in
-`final_sequences_set.FNA`.
+For every locus in the list of angio353 loci:  
+- retrieve the sequences from the reference set that belong to the locus
+(i.e. either having it as locus name or having it in their TS name) and
+store them in `final_sequences_set.FNA`.
 
 ``` bash
 for locus in $(cat Angio353_from_Melasto689_list.txt);
@@ -1752,8 +1767,9 @@ scaffold_SWGX_2016500_Tetrazygia_bicolor-LOC00263 =
 scaffold_SWGX_2016500_Tetrazygia_bicolor-NM_113708.2
 
 We end up with the manually modified .csv file
-`locus_matching_table_CUSTOM.csv` containing the string to replace on
-the first column and the replacement string on the second column.
+[`locus_matching_table_CUSTOM.csv`](CLEAN_PROBE_SET/locus_matching_table_CUSTOM.csv)
+containing the string to replace on the first column and the replacement
+string on the second column.
 
 ### 3.2 Renaming
 
@@ -1866,10 +1882,9 @@ cat TS_checked_OK.FNA TS_to_correct_CORRECTED.FNA > final_sequences_set_correcte
 
 Manually get the list of TS with low complexity from
 `check_targetfile.log` and `check_targetfile_aa.log` store it in the
-file `list_of_TS_with_low_complexity.txt`. FOr This step removes the TS
+file `list_of_TS_with_low_complexity.txt`. For This step removes the TS
 flagged to present low complexity for a given locus, but only if the
-locus is also represented by other Tss (not flagged with low
-complexity).
+locus is also represented by other TS (not flagged with low complexity).
 
 -   remove duplicates from `list_of_TS_with_low_complexity.txt`
 -   retrieve the list of loci for the list of TS
@@ -1942,8 +1957,11 @@ hybpiper check_targetfile --targetfile_aa PROBE_SET_CLEAN_prot.FAA > check_targe
 ```
 
 The sequence set is now cleaned and can be used with HybPiper or any
-other program. The final files are `PROBE_SET_CLEAN.FNA` (nucleotides)
-and `PROBE_SET_CLEAN_prot.FAA` (amino-acids).
+other program. **The final files are
+[`PROBE_SET_CLEAN.FNA`](CLEAN_PROBE_SET/PROBE_SET_CLEAN.FNA)
+(nucleotides) and
+[`PROBE_SET_CLEAN_prot.FAA`](CLEAN_PROBE_SET/PROBE_SET_CLEAN_prot.FAA)
+(amino-acids).**
 
 # References
 
@@ -1970,6 +1988,9 @@ and `PROBE_SET_CLEAN_prot.FAA` (amino-acids).
     CJ (2021) New targets acquired: Improving locus recovery from the
     Angiosperms353 probe set. Applications in Plant Sciences 9.
     <https://doi.org/10.1002/aps3.11420>
+-   One Thousand Plant Transcriptomes Initiative (2019) One thousand
+    plant transcriptomes and the phylogenomics of green plants. Nature
+    574: 679–685. <https://doi.org/10.1038/s41586-019-1693-2>
 -   Reginato M, Michelangeli FA (2016) Primers for low-copy nuclear
     genes in the Melastomataceae. Applications in Plant Sciences
     4: 1500092. <https://doi.org/10.3732/apps.1500092>
