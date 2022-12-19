@@ -1,25 +1,5 @@
-Cleaning of the Melastomataceae 689 probe set for target enrichment
+Cleaning of the Melastomataceae probe set for target enrichment
 ================
-
-# Title TO REMOVE
-
-TO DO:
-
--   OK go throughout the text and check for coherence
--   OK add the relevant files in the folders for the different steps
-    (avoid heavy files)
--   OK develop the Readme (including a link to clean probe set .FNA and
-    .FAA)
--   add statement that this probe set is only for bioinformatic use
--   add statement that not all intermediate files are in the repo
-    (mainly heavy files like selfblast results)
--   find a way to maybe lock the other PROBE_SET_CLEANING folder to
-    avoid doublons
-
-**Files to provide \[TO CHECK\]** custom_TS_correction.sh
-align_translated_to_ref_and_draw_consensus.R (add package dependency in
-dependency list) select_file_Myrtales.txt
-locus_matching_table_CUSTOM.csv
 
 The basic idea of the cleaning process is to build a set of reference
 sequences and to align every template sequence from Melasto689 to this
@@ -29,16 +9,17 @@ template sequences are then associated to the reference sequences they
 matched into a final sequence set. Finally, the final sequence set go
 through different checks and fine-tuned cleaning.
 
-The process will be divided in 3 main steps:  
-- **Step 1**: build the set of reference sequences  
-- **Step 2**: align and associate the Melasto689 template sequences to
-the set of reference into a final sequence set - **Step 3**: final
-checks and fine-tuned cleaning: extra steps to make sure the sequences
-are clean
+The process will be divided in 3 main steps:
 
-**Directory organization**  
-For simplicity, all the following assumes analyses are run in a single
-directory `$path_to_wd`. This directory is divided in 6 sub-directory:
+-   **Step 1**: build the set of reference sequences  
+-   **Step 2**: align and associate the Melasto689 template sequences to
+    the set of reference into a final sequence set  
+-   **Step 3**: final checks and fine-tuned cleaning: extra steps to
+    make sure the sequences are clean
+
+**Directory organization.** For simplicity, all the following assumes
+analyses are run in a single directory `$path_to_wd`. This directory is
+divided in 6 sub-directory:
 
 -   `prepare1KP` (Step 1: 1. - Prepare the 1KP transcriptomes reference
     sequences set)
@@ -63,24 +44,28 @@ mkdir melasto689_on_full_ref
 mkdir CLEAN_PROBE_SET
 ```
 
-**Naming convention**  
-Sequences names follow the convention used in many probe sets for
-targeted sequencing and associated programs (e.g. Angio353, HybPiper,
-Captus, SECAPR). The name of a sequence is composed of the template
-sequence ID (generally identifying the taxon from which the sequence
-initially come from, sometimes with additional info) and the locus name
-separated by an hyphen, e.g. `>template_sequence_ID-locusID`
+**Naming convention.** Sequences names follow the convention used in
+many probe sets for targeted sequencing and associated programs
+(e.g. Angio353, HybPiper, Captus, SECAPR). The name of a sequence is
+composed of the template sequence ID (generally identifying the taxon
+from which the sequence initially come from, sometimes with additional
+info) and the locus name separated by an hyphen,
+e.g. `>template_sequence_ID-locusID`
 
-**Scripts**
-
-Every step of the cleaning process is presented and explained in detail
-below. The command are presented as if run in interactive mode. For some
-steps, the running time is long and was actually not achieved in
-interactive mode, but using `.sh` scripts ( scripts were run on a
-computing cluster that uses the SLURM manager, `sbatch` command). The
-`.sh` scripts are made available in this repository and a statement is
+**Scripts.** Every step of the cleaning process is presented and
+explained in detail below. The command are presented as if run in
+interactive mode. For some steps, the running time is long and was
+actually not achieved in interactive mode, but using `.sh` scripts
+(scripts were run on a computing cluster that uses the SLURM manager,
+`sbatch` command). The `.sh` scripts are made available in this
+repository (see the [`script`](scripts) folder) and a statement is
 present at the beginning of each step specifying which script to refer
 to.
+
+**Files.** Note that not all the intermediate files produced by the
+cleaning are present in this repository. The missing files are mainly
+redundant .FNA files or heavy (\>100 Mo) blast output tables. The most
+important files are however included.
 
 **Dependencies**
 

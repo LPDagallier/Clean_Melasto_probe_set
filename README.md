@@ -18,6 +18,10 @@ The new and clean probe set is available here:
 [`PROBE_SET_CLEAN_prot.FAA`](CLEAN_PROBE_SET/PROBE_SET_CLEAN_prot.FAA)
 (amino acid version).
 
+The purpose of this clean probe set is to be used **bioinformatically**
+to recover targeted sequences from sequencing reads, but not to
+physically target the sequences in vitro.
+
 ### How to cite
 
 > Please cite as:
