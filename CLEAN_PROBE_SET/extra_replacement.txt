@@ -1,0 +1,5 @@
+Tetrazygia__NM_113708.2__hc-LOC00263	Tetrazygia_hc-NM_113708.2
+Tetrazygia__NM_124699.3__hit-LOC00263	Tetrazygia_hit-NM_124699.3
+Tibouchina__NM_113708.2__hit-LOC00263	Tibouchina_hit-NM_113708.2
+Tibouchina__NM_124699.3__hit-LOC00263	Tibouchina_hit-NM_124699.3
+scaffold_SWGX_2008545_Tetrazygia_bicolor-LOC00263	scaffold_SWGX_2008545_Tetrazygia_bicolor-NM_113708.2

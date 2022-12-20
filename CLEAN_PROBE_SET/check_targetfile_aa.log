@@ -1,0 +1,117 @@
+[INFO]:    Checking target file FASTA header formatting...
+[INFO]:    The target file FASTA header formatting looks good!
+[INFO]:    The target file contains at least one sequence for 396 unique genes.
+[INFO]:    The target file final_sequences_set_TO_CHECK_prot.FAA has been specified as
+           containing protein sequences. These protein sequences will be checked for low-
+           complexity regions
+[INFO]:    Checking the target file for sequences with low-complexity regions...
+[INFO]:    Type of sequences: protein
+[INFO]:    Sliding window size: 50
+[INFO]:    Minimum complexity threshold: 3.0
+[WARNING]: The target file provided (final_sequences_set_TO_CHECK_prot.FAA) contains
+           sequences with low-complexity regions. The sequence names are printed below.
+           These sequences can cause problems when running HybPiper, see
+           https://github.com/mossmatters/HybPiper/wiki/Troubleshooting,-common-
+           issues,-and-recommendations. We recommend one of the following approaches:
+
+           1) Remove these sequence from your target file, ensuring that your file still
+              contains other representative sequences for the corresponding genes.
+
+           2) Start the run using the parameter "--timeout_assemble" (e.g.
+              "--timeout_assemble 200"). See https://github.com/mossmatters/HybPiper/wiki/
+              Full-pipeline-parameters#10-hybpiper-assemble for details.
+
+
+           Sequences with low complexity regions are:
+
+           scaffold_SWGX_2016864_Tetrazygia_bicolor-5328
+           scaffold_SWGX_2004817_Tetrazygia_bicolor-TC09G026350
+           FGDU_GW_Ambtr-6128
+           RJNQ_GW_Ambtr_EG_Ambtr-7028
+           Ambtr-6860
+           OQBM-6860
+           SWGX_GW_THHD-6405
+           GJNX-6544
+           SWGX_GW_IRAF-7174
+           AJJE-6036
+           BZDF-6797
+           MRKX-6860
+           RZTJ-6128
+           SUVN-6544
+           RJNQ_GW_Ambtr-6128
+           Theca_v1_1-5123
+           AYMT_GW_THHD-6405
+           scaffold_SWGX_2015970_Tetrazygia_bicolor-6544
+           scaffold_SWGX_2016774_Tetrazygia_bicolor-AT5G13520
+           QTJY-6128
+           WWQZ-6128
+           scaffold_SWGX_2012141_Tetrazygia_bicolor-AT4G15420
+           HAEU-6128
+           Arath-6544
+           BWRK-6128
+           Tibouchina_hc-TC09G026350
+           VMNH-6128
+           EYKJ-6198
+           GUMF-6544
+           UAXP_EG_Arath-5454
+           Tibouchina_hc-AT5G21070
+           ROLB-7174
+           AJJE-6128
+           YNUE-6860
+           AYMT_GW_ZSSR-5454
+           YNUE-7174
+           scaffold_SWGX_2001186_Tetrazygia_bicolor-5716
+           scaffold_WWQZ_2031374_Medinilla_magnifica-TC03G028600
+           Orysa-6860
+           Ambtr-6128
+           UAXP-6860
+           SWGX_EG_Arath-5977
+           ZSSR-6128
+           RJNQ_GW_Arath-4942
+           ZCUA-6128
+           AEPI-6544
+           IRAF-7174
+           UMUL-5427
+           RQZP-6128
+           AYMT-5893
+           SWGX_GW_Orysa-5981
+           OSHQ-5990
+           SWGX_GW_MAQO-6041
+           Orysa-6128
+           Arath-6128
+           RSPO-6128
+           YNUE-6405
+           RJNQ_GW_THHD-6405
+           Orysa-5463
+           Orysa-6284
+           SWGX-6860
+           scaffold_WWQZ_2024314_Medinilla_magnifica-5328
+           SWGX-6128
+           scaffold_SWGX_2069799_Tetrazygia_bicolor-TC05G008010
+           scaffold_SWGX_2003807_Tetrazygia_bicolor-TC03G028600
+           scaffold_WWQZ_2034707_Medinilla_magnifica-AT4G15420
+           BHYC-6128
+           UAXP-6797
+           AUGV-5454
+           FEDW-6860
+           Tibouchina_hc-TC09G025650
+           SWGX_GW_QSLH_EG_Arath-5960
+           NNOK-6128
+           BEKN-6128
+           Ambtr-6544
+           XHKT-6544
+           UPOG-6198
+           Transcriptome_hc-TC01G032610
+           scaffold_WWQZ_2034816_Medinilla_magnifica-5716
+           AJJE_GW_ZSSR-5454
+           YNUE-6544
+           AYMT_GW_MTHW-6110
+           Arath-5940
+           NGRR-6447
+           Ambtr-5596
+           UMUL-6128
+           KKDQ-6544
+           scaffold_WWQZ_2034119_Medinilla_magnifica-6883
+           AFQQ-5463
+           TXMP-7174
+           BIDT-5032

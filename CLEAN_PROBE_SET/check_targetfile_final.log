@@ -1,0 +1,51 @@
+[INFO]:    Checking target file FASTA header formatting...
+[INFO]:    The target file FASTA header formatting looks good!
+[INFO]:    The target file contains at least one sequence for 396 unique genes.
+[INFO]:    The target file PROBE_SET_CLEAN_v4.FNA has been specified as containing DNA
+           sequences. These DNA sequences will be checked for low-complexity regions.
+           NOTE: the sequences flagged as having low-complexity regions can sometimes
+           differ between a DNA target file and the corresponding translated protein
+           target file. If you translate your target file to run "hybpiper assemble" with
+           BLASTx/DIAMOND, we recommend re-checking the translated sequences for low-
+           complexity regions.
+[INFO]:    Checking the target file for sequences with low-complexity regions...
+[INFO]:    Type of sequences: DNA
+[INFO]:    Sliding window size: 100
+[INFO]:    Minimum complexity threshold: 1.5
+[WARNING]: The target file provided (PROBE_SET_CLEAN_v4.FNA) contains sequences with low-
+           complexity regions. The sequence names are printed below. These sequences can
+           cause problems when running HybPiper, see
+           https://github.com/mossmatters/HybPiper/wiki/Troubleshooting,-common-
+           issues,-and-recommendations. We recommend one of the following approaches:
+
+           1) Remove these sequence from your target file, ensuring that your file still
+              contains other representative sequences for the corresponding genes.
+
+           2) Start the run using the parameter "--timeout_assemble" (e.g.
+              "--timeout_assemble 200"). See https://github.com/mossmatters/HybPiper/wiki/
+              Full-pipeline-parameters#10-hybpiper-assemble for details.
+
+
+           Sequences with low complexity regions are:
+
+           QTJY-6128
+           RZTJ-6128
+           RJNQ_GW_Ambtr-6128
+           UMUL-6128
+           BWRK-6128
+           VMNH-6128
+           RQZP-6128
+           WWQZ-6128
+           SWGX-6128
+           BHYC-6128
+           FGDU_GW_Ambtr-6128
+           ZCUA-6128
+           Arath-6128
+           HAEU-6128
+           AJJE-6128
+           Orysa-6128
+           RSPO-6128
+           NNOK-6128
+           Ambtr-6128
+           ZSSR-6128
+           BEKN-6128
