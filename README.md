@@ -24,4 +24,4 @@ physically target the sequences in vitro.
 
 ### How to cite
 
-> Please cite as:
+> Please cite as: *in prep*

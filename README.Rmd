@@ -28,6 +28,6 @@ The purpose of this clean probe set is to be used **bioinformatically** to recov
 
 ### How to cite
 
-> Please cite as: 
+> Please cite as: *in prep*
 
 
