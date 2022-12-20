@@ -1,0 +1,12 @@
+2	scaffold_WWQZ_2007482_Medinilla_magnifica-LOC20411, scaffold_WWQZ_2007483_Medinilla_magnifica-LOC20411
+2	YHLF__5177__-LOC00149, BZDF__5177__-LOC00149
+2	ZINQ__6914__-LOC02369, BZDF__6914__-LOC02369
+2	ZINQ__5945__-LOC07873, BZDF__5945__-LOC07873
+2	scaffold_SWGX_2069551_Tetrazygia_bicolor-LOC03592, SWGX__7128__-LOC03592
+2	ZINQ__7141__-LOC09311, BZDF__7141__-LOC09311
+2	scaffold_WWQZ_2026576_Medinilla_magnifica-LOC01351, scaffold_WWQZ_2026577_Medinilla_magnifica-LOC01351
+2	scaffold_SWGX_2013227_Tetrazygia_bicolor-LOC15734, scaffold_SWGX_2013228_Tetrazygia_bicolor-LOC15734
+2	scaffold_SWGX_2008507_Tetrazygia_bicolor-LOC14099, scaffold_SWGX_2008508_Tetrazygia_bicolor-LOC14099
+2	ARYD__5427__-LOC03749, BZDF__5427__-LOC03749
+2	scaffold_WWQZ_2034023_Medinilla_magnifica-LOC20331, WWQZ__5554__-LOC20331
+2	scaffold_SWGX_2016059_Tetrazygia_bicolor-LOC07873, SWGX__5945__-LOC07873
