@@ -21,18 +21,19 @@ The process will be divided in 3 main steps:
 analyses are run in a single directory `$path_to_wd`. This directory is
 divided in 6 sub-directory:
 
--   `prepare1KP` (Step 1: 1. - Prepare the 1KP transcriptomes reference
-    sequences set)
--   `prepare_mega353` (Step 1: 2. - Prepare the mega353 reference
-    sequences set)
--   `full_reference_DB` (Step 1: 3. - Merge the two previous reference
-    sequences set)
--   `original_template_sequences` (Step 2: 1. - Prepare the original
-    Melast689 template sequence set)
--   `melasto689_on_full_ref` (Step 2: 2. - Align and associate the
-    Melasto689 template sequences to the set of reference)
--   `CLEAN_PROBE_SET` (Step 3 - Contains the final and cleaned probe
-    set)
+-   [`prepare1KP`](prepare1KP) (Step 1: 1. - Prepare the 1KP
+    transcriptomes reference sequences set)
+-   [`prepare_mega353`](prepare_mega353) (Step 1: 2. - Prepare the
+    mega353 reference sequences set)
+-   [`full_reference_DB`](full_reference_DB) (Step 1: 3. - Merge the two
+    previous reference sequences set)
+-   [`original_template_sequences`](original_template_sequences) (Step
+    2: 1. - Prepare the original Melast689 template sequence set)
+-   [`melasto689_on_full_ref`](melasto689_on_full_ref) (Step 2: 2. -
+    Align and associate the Melasto689 template sequences to the set of
+    reference)
+-   [`CLEAN_PROBE_SET`](CLEAN_PROBE_SET) (Step 3 - Contains the final
+    and cleaned probe set)
 
 ``` bash
 cd $path_to_wd
@@ -63,9 +64,9 @@ present at the beginning of each step specifying which script to refer
 to.
 
 **Files.** Note that not all the intermediate files produced by the
-cleaning are present in this repository. The missing files are mainly
-redundant .FNA files or heavy (\>100 Mo) blast output tables. The most
-important files are however included.
+cleaning process are present in this repository. The missing files are
+some intermediate .FNA files or heavy (\>100 Mo) blast output tables.
+The most important files are still included.
 
 **Dependencies**
 
