@@ -11,29 +11,29 @@ through different checks and fine-tuned cleaning.
 
 The process will be divided in 3 main steps:
 
--   **Step 1**: build the set of reference sequences  
--   **Step 2**: align and associate the Melasto689 template sequences to
-    the set of reference into a final sequence set  
--   **Step 3**: final checks and fine-tuned cleaning: extra steps to
-    make sure the sequences are clean
+- **Step 1**: build the set of reference sequences  
+- **Step 2**: align and associate the Melasto689 template sequences to
+  the set of reference into a final sequence set  
+- **Step 3**: final checks and fine-tuned cleaning: extra steps to make
+  sure the sequences are clean
 
 **Directory organization.** For simplicity, all the following assumes
 analyses are run in a single directory `$path_to_wd`. This directory is
 divided in 6 sub-directory:
 
--   [`prepare1KP`](prepare1KP) (Step 1: 1. - Prepare the 1KP
-    transcriptomes reference sequences set)
--   [`prepare_mega353`](prepare_mega353) (Step 1: 2. - Prepare the
-    mega353 reference sequences set)
--   [`full_reference_DB`](full_reference_DB) (Step 1: 3. - Merge the two
-    previous reference sequences set)
--   [`original_template_sequences`](original_template_sequences) (Step
-    2: 1. - Prepare the original Melast689 template sequence set)
--   [`melasto689_on_full_ref`](melasto689_on_full_ref) (Step 2: 2. -
-    Align and associate the Melasto689 template sequences to the set of
-    reference)
--   [`CLEAN_PROBE_SET`](CLEAN_PROBE_SET) (Step 3 - Contains the final
-    and cleaned probe set)
+- [`prepare1KP`](prepare1KP) (Step 1: 1. - Prepare the 1KP
+  transcriptomes reference sequences set)
+- [`prepare_mega353`](prepare_mega353) (Step 1: 2. - Prepare the mega353
+  reference sequences set)
+- [`full_reference_DB`](full_reference_DB) (Step 1: 3. - Merge the two
+  previous reference sequences set)
+- [`original_template_sequences`](original_template_sequences) (Step
+  2: 1. - Prepare the original Melast689 template sequence set)
+- [`melasto689_on_full_ref`](melasto689_on_full_ref) (Step 2: 2. - Align
+  and associate the Melasto689 template sequences to the set of
+  reference)
+- [`CLEAN_PROBE_SET`](CLEAN_PROBE_SET) (Step 3 - Contains the final and
+  cleaned probe set)
 
 ``` bash
 cd $path_to_wd
@@ -70,47 +70,44 @@ The most important files are still included.
 
 **Dependencies**
 
--   [SeqKit 2.0.0](https://bioinf.shenwei.me/seqkit/)
--   [NCBI BLAST 2.10.1](https://blast.ncbi.nlm.nih.gov/Blast.cgi)
--   [csvtk 0.23.0](https://bioinf.shenwei.me/csvtk/)
--   [bedtools 2.30.0](https://bedtools.readthedocs.io/en/latest/)
--   [R 4.2](https://www.r-project.org/) (needs packages
-    [DECIPHER](http://www2.decipher.codes/),
-    [Biostrings](https://bioconductor.org/packages/release/bioc/html/Biostrings.html))
--   [Python 3.10](https://www.python.org/downloads/release/python-3100/)
--   [HybPiper 2.0.1](https://github.com/mossmatters/HybPiper)
--   [AliView](https://ormbunkar.se/aliview/)
--   [Muscle v3.8.425](https://drive5.com/muscle/) (as wrapped in
-    AliView)
+- [SeqKit 2.0.0](https://bioinf.shenwei.me/seqkit/)
+- [NCBI BLAST 2.10.1](https://blast.ncbi.nlm.nih.gov/Blast.cgi)
+- [csvtk 0.23.0](https://bioinf.shenwei.me/csvtk/)
+- [bedtools 2.30.0](https://bedtools.readthedocs.io/en/latest/)
+- [R 4.1.3](https://www.r-project.org/) (needs packages
+  [DECIPHER](http://www2.decipher.codes/),
+  [Biostrings](https://bioconductor.org/packages/release/bioc/html/Biostrings.html))
+- [Python 3.10](https://www.python.org/downloads/release/python-3100/)
+- [HybPiper 2.0.1](https://github.com/mossmatters/HybPiper)
+- [AliView 1.28](https://ormbunkar.se/aliview/)
+- [Muscle v3.8.425](https://drive5.com/muscle/) (as wrapped in AliView)
 
 **Glossary**:
 
--   **Angio353** (sometimes referred as **full Angio353**): the original
-    Angiosperms 353 probe set
--   **locusCustomID**: temporary locus identifier given to the loci
-    during the cleaning process
--   **mega353**: the Angiosperms 353 probe set extended with
-    transcriptome sequences (see:
-    <https://github.com/chrisjackson-pellicle/NewTargets>)
--   **Melasto689**: the full Melastomataceae probe set. It is composed
-    of 384 loci, each of them being composed of 1 to 4 template
-    sequences, for a total of 689 template sequences. It is divided into
-    4 subsets of loci:
-    -   **angio353** (with small **a**): a set of 266 loci (439 template
-        sequences) that come from the Angiosperms 353 probe set
-    -   **markerminer**: a set of 104 loci (215 template sequences) that
-        come from putative single-copy loci identified with MarkerMiner
-    -   **functional_extra**: a set of 6 loci (12 template sequences)
-        that come from functional genes
-    -   **RM2016**: a set of 8 loci (23 template sequences) that come
-        from [Reginato & Michelangeli
-        (2016)](https://doi.org/10.3732/apps.1500092)
--   **reference sequence** (or **RS**): a sequence from the reference
-    set; in the sequence set, a same locus can have several template
-    sequences
--   **template sequence** (or **TS**): a sequence from the Melasto689
-    set or final sequence set; in the sequence set, a same locus can
-    have several template sequences
+- **Angio353** (sometimes referred as **full Angio353**): the original
+  Angiosperms 353 probe set
+- **locusCustomID**: temporary locus identifier given to the loci during
+  the cleaning process
+- **mega353**: the Angiosperms 353 probe set extended with transcriptome
+  sequences (see: <https://github.com/chrisjackson-pellicle/NewTargets>)
+- **Melasto689**: the full Melastomataceae probe set. It is composed of
+  384 loci, each of them being composed of 1 to 4 template sequences,
+  for a total of 689 template sequences. It is divided into 4 subsets of
+  loci:
+  - **angio353** (with small **a**): a set of 266 loci (439 template
+    sequences) that come from the Angiosperms 353 probe set
+  - **markerminer**: a set of 104 loci (215 template sequences) that
+    come from putative single-copy loci identified with MarkerMiner
+  - **functional_extra**: a set of 6 loci (12 template sequences) that
+    come from functional genes
+  - **RM2016**: a set of 8 loci (23 template sequences) that come from
+    [Reginato & Michelangeli
+    (2016)](https://doi.org/10.3732/apps.1500092)
+- **reference sequence** (or **RS**): a sequence from the reference set;
+  in the sequence set, a same locus can have several template sequences
+- **template sequence** (or **TS**): a sequence from the Melasto689 set
+  or final sequence set; in the sequence set, a same locus can have
+  several template sequences
 
 # Step 1: build the set of reference sequences
 
@@ -165,33 +162,32 @@ Transcriptomes Initiative
 `locusOrthologID`. The identifier is in the form
 “gi\|255582030\|ref\|XP_002531812.1\|”.
 
--   get the list of the unique orthogroup identifiers from the
-    `SWGX-translated-reference-names.tsv`
-    `WWQZ-translated-reference-names.tsv` files into the file
-    `orthoIDs_list.txt`
+- get the list of the unique orthogroup identifiers from the
+  `SWGX-translated-reference-names.tsv`
+  `WWQZ-translated-reference-names.tsv` files into the file
+  `orthoIDs_list.txt`
 
 ``` bash
 cd $path_to_wd/prepare1KP
 cat SWGX-translated-reference-names.tsv WWQZ-translated-reference-names.tsv | awk '{print $2}' | sort | uniq > orthoIDs_list.txt # get the list of the unique gene identifiers according to OrthoFinder
 ```
 
--   append a unique custom locus name (*`locusCustomID`*) in the form
-    LOC##### to every orthogroup (*`locusOrthologID`*) and store them in
-    the array `$loc_list`. The array contains locus names in the form
-    `locusOrthologID__locusCustomID`.
+- append a unique custom locus name (*`locusCustomID`*) in the form
+  LOC##### to every orthogroup (*`locusOrthologID`*) and store them in
+  the array `$loc_list`. The array contains locus names in the form
+  `locusOrthologID__locusCustomID`.
 
 ``` bash
 loc_list=$(cat orthoIDs_list.txt | awk '{ printf $1"__LOC" "%05d\n", ++a }') # append a unique custom locus name in the form LOC##### (locusCustomID) to every orthogroup (locusOrthologID) and store them in the array loc_list
 ```
 
--   create a folder called `orthogroups` and initialize the files:
-    -   `ortho_loci_table.txt`: will contain the correspondance between
-        *`locusCustomID`*, *`locusOrthologID`* and
-        *`transcriptSequencesID`*
-    -   `SWGX-WWQZ-translated-nucleotides-grouped.FNA`: will contain the
-        transcriptome sequences, grouped by custom locus ID
-    -   `SWGX-WWQZ-translated-prot-grouped.FAA`: will contain the
-        transcriptome sequences, grouped by custom locus ID
+- create a folder called `orthogroups` and initialize the files:
+  - `ortho_loci_table.txt`: will contain the correspondance between
+    *`locusCustomID`*, *`locusOrthologID`* and *`transcriptSequencesID`*
+  - `SWGX-WWQZ-translated-nucleotides-grouped.FNA`: will contain the
+    transcriptome sequences, grouped by custom locus ID
+  - `SWGX-WWQZ-translated-prot-grouped.FAA`: will contain the
+    transcriptome sequences, grouped by custom locus ID
 
 ``` bash
 mkdir orthogroups
@@ -200,20 +196,18 @@ echo locusCustomID locusOrthologID transcriptSequencesID > orthogroups/ortho_loc
 :> orthogroups/SWGX-WWQZ-translated-prot-grouped.FAA # initialize file
 ```
 
--   for every locus name in the list of loci `$loc_list`:
-    -   define \$locID as the custom locus ID (*`locusCustomID`*)
-    -   define \$orthoID as the orthogroup ID (*`locusOrthologID`*)
-    -   retrieve the `transcriptSequencesID`(s) corresponding to the
-        *`locusOrthologID`* in SWGX and WWQZ databases
-    -   if `transcriptSequencesID`(s) were retrieved:
-        -   extract the sequence(s) from the databases, append the
-            custom locus ID (*`locusCustomID`*) to its name, and append
-            the renamed sequence to
-            `SWGX-WWQZ-translated-nucleotides-grouped.FNA` and
-            `SWGX-WWQZ-translated-prot-grouped.FAA`
-    -   populate the `ortho_loci_table.txt` with the corresponding
-        *`locusCustomID`*, *`locusOrthologID`* and
-        *`transcriptSequencesID`*
+- for every locus name in the list of loci `$loc_list`:
+  - define \$locID as the custom locus ID (*`locusCustomID`*)
+  - define \$orthoID as the orthogroup ID (*`locusOrthologID`*)
+  - retrieve the `transcriptSequencesID`(s) corresponding to the
+    *`locusOrthologID`* in SWGX and WWQZ databases
+  - if `transcriptSequencesID`(s) were retrieved:
+    - extract the sequence(s) from the databases, append the custom
+      locus ID (*`locusCustomID`*) to its name, and append the renamed
+      sequence to `SWGX-WWQZ-translated-nucleotides-grouped.FNA` and
+      `SWGX-WWQZ-translated-prot-grouped.FAA`
+  - populate the `ortho_loci_table.txt` with the corresponding
+    *`locusCustomID`*, *`locusOrthologID`* and *`transcriptSequencesID`*
 
 ``` bash
 for name in $loc_list;
@@ -239,8 +233,8 @@ do
 done
 ```
 
--   remove sequences less than 30 amino-acids (AA) and less than 90
-    nucleotides (NT) long
+- remove sequences less than 30 amino-acids (AA) and less than 90
+  nucleotides (NT) long
 
 ``` bash
 cd orthogroups
@@ -330,16 +324,16 @@ a similarity table (`selfblast_table.txt`).
 
 For every locus in the list of loci from the pairs of loci:
 
--   retrieve the other locus (loci) it matches to, and arrange them into
-    a list
--   search if any of the locus in the list is already in the table
-    `selfblast_table.txt`
--   if none of the locus is in the similarity table, then append the
-    list at the end of the table
--   if any of the locus is found in the similarity table, then extract
-    the matching list of loci in the similarity table, append the list
-    to the extracted list, remove duplicates loci and replace the
-    original list with the newly generated list
+- retrieve the other locus (loci) it matches to, and arrange them into a
+  list
+- search if any of the locus in the list is already in the table
+  `selfblast_table.txt`
+- if none of the locus is in the similarity table, then append the list
+  at the end of the table
+- if any of the locus is found in the similarity table, then extract the
+  matching list of loci in the similarity table, append the list to the
+  extracted list, remove duplicates loci and replace the original list
+  with the newly generated list
 
 ``` bash
 query_list=$(cat pairs_SB1.csv | awk -F ',' '{print $1}' | sort | uniq)
@@ -547,43 +541,42 @@ seqkit seq -n $Angio353_FNA | sed 's/.*-//g' | sort | uniq > Angio353_list.txt
 
 For each locus in the list of mega353 loci:
 
--   create a sub-directory and set it as current directory
--   extract the locus sequence from the mega353 database into a .FNA
-    file, translate it (.FAA)
--   search for similar protein sequence into the transcriptome protein
-    database using `blastp` and store the results in a .csv file
--   if the .csv file exists and is not empty (i.e. blast found matching
-    sequences), then:
-    -   filter the .csv to keep only query sequences with percentage
-        identity greater than 60% to the matching subject, alignment
-        length greater than 50 amino-acids, bitscore greater than 100,
-        frame greater than 0 (i.e. sequences not in reverse complement)
-        and a query coverage greater than 50% (meaning at least 50% of
-        the query covers the subject sequence)
--   if the filtered .csv file exists and is not empty (i.e. matching
-    sequences remain after filtering), then:
-    -   extract the *`customLocusID`*(s) from the matching sequence(s)
-    -   if more than 1 *`customLocusID`* were found, then:
-        -   print a warning
-        -   append the locus sequences to the full reference database as
-            they are (no renaming)
-        -   print the mega353 locus name and the mention
-            “multiplematches” to the matching table
-    -   else (i.e. only 1 *`customLocusID`* was found), then:
-        -   rename the locus sequence so that the mega353 locus name
-            (4-digit sequence) is enclosed in 2 \_\_ (double underscore)
-            and moved to the sequence ID, and so that the
-            *`customLocusID`* is appended at the end of the sequence
-        -   append the renamed locus sequence to the full reference
-            database
-        -   print the mega353 locus name and its *`customLocusID`* to
-            the matching table
--   else (i.e. no matching sequences remain after filtering), then:
-    -   append the locus sequences to the full reference database as
-        they are (no renaming)
-    -   print the mega353 locus name and the mention “nomatch” to the
-        matching table
--   set the upper level directory as current directory
+- create a sub-directory and set it as current directory
+- extract the locus sequence from the mega353 database into a .FNA file,
+  translate it (.FAA)
+- search for similar protein sequence into the transcriptome protein
+  database using `blastp` and store the results in a .csv file
+- if the .csv file exists and is not empty (i.e. blast found matching
+  sequences), then:
+  - filter the .csv to keep only query sequences with percentage
+    identity greater than 60% to the matching subject, alignment length
+    greater than 50 amino-acids, bitscore greater than 100, frame
+    greater than 0 (i.e. sequences not in reverse complement) and a
+    query coverage greater than 50% (meaning at least 50% of the query
+    covers the subject sequence)
+- if the filtered .csv file exists and is not empty (i.e. matching
+  sequences remain after filtering), then:
+  - extract the *`customLocusID`*(s) from the matching sequence(s)
+  - if more than 1 *`customLocusID`* were found, then:
+    - print a warning
+    - append the locus sequences to the full reference database as they
+      are (no renaming)
+    - print the mega353 locus name and the mention “multiplematches” to
+      the matching table
+  - else (i.e. only 1 *`customLocusID`* was found), then:
+    - rename the locus sequence so that the mega353 locus name (4-digit
+      sequence) is enclosed in 2 \_\_ (double underscore) and moved to
+      the sequence ID, and so that the *`customLocusID`* is appended at
+      the end of the sequence
+    - append the renamed locus sequence to the full reference database
+    - print the mega353 locus name and its *`customLocusID`* to the
+      matching table
+- else (i.e. no matching sequences remain after filtering), then:
+  - append the locus sequences to the full reference database as they
+    are (no renaming)
+  - print the mega353 locus name and the mention “nomatch” to the
+    matching table
+- set the upper level directory as current directory
 
 ``` bash
 for locus in $(cat Angio353_list.txt)
@@ -690,15 +683,18 @@ A same locus may have to be associated with more than one other locus.
 We thus need to retrieve all the loci associations, and print them in a
 similarity table (`selfblast_table.txt`).
 
-For every query list of the pairs of loci: - retrieve the other locus
-(loci) it matches to (subject), and arrange them into a list - search if
-any of the locus in the list is already in the table
-`selfblast_table.txt` - if none of the locus is in the similarity table,
-then append the list at the end of the table - if any of the locus is
-found in the similarity table, then extract the matching list of loci in
-the similarity table, append the list to the extracted list, remove
-duplicates loci and replace the original list with the newly generated
-list
+For every query list of the pairs of loci:
+
+- retrieve the other locus (loci) it matches to (subject), and arrange
+  them into a list
+- search if any of the locus in the list is already in the table
+  `selfblast_table.txt`
+- if none of the locus is in the similarity table, then append the list
+  at the end of the table
+- if any of the locus is found in the similarity table, then extract the
+  matching list of loci in the similarity table, append the list to the
+  extracted list, remove duplicates loci and replace the original list
+  with the newly generated list
 
 ``` bash
 query_list=$(cat pairs.csv | awk -F ',' '{print $1}' | sort | uniq)
@@ -823,8 +819,8 @@ Download or copy the [original Melastomataceae 689 target sequence
 set](https://datadryad.org/stash/dataset/doi:10.5061/dryad.8931zcrm2),
 and decompress the `Template_sequences.zip` folder.
 
--   De-align the sequences
--   Remove all the ? characters
+- De-align the sequences
+- Remove all the ? characters
 
 ``` bash
 cd $path_to_wd/original_template_sequences
@@ -937,7 +933,7 @@ seqkit seq -n Melasto689_trimed.FNA > template_sequences_list.txt
 
 ### 2.3 Align every template sequence to the reference and extract the hits
 
-Every template sequence (TS) from Melasto689 (`Melasto689_trimed.FNA`)
+Each template sequence (TS) from Melasto689 (`Melasto689_trimed.FNA`)
 will be aligned to the set of references designed in Step 1. The aligner
 used here is `BLAST` (`blastx-fast`). The regions of the TS that match
 to a reference (the hits) are then extracted, the name of the reference
@@ -957,65 +953,61 @@ mkdir NMR_hits
 
 For every TS in the list of template sequences:
 
--   create a sub-directory and set it as current directory
--   extract the TS from the whole Melasto689_trimmed file
--   align the TS to the reference with `blastx-fast` and store the
-    result into a table
--   if the result table exists and is not empty, then:
-    -   filter the results to keep only the matches with a bitscore
-        greater than 50 and a query coverage greater than 50% (meaning
-        at least 50% of the query covers the subject sequence), or
-        matches with percentage identity greater than 60%, a query
-        coverage greater than 10%, and a bitscore greater than 50
--   if the filtered table exists and is not empty, then:
-    -   for every line in the table (i.e. for every hit):
-        -   retrieve the reference locus to which the hit aligns
-            `refLocus`
-        -   retrieve the frame in which the hit aligns to the reference
-            `frame`
-        -   print the matching subject (i.e. the name of the reference
-            TS to which the hit matched) into the file
-            `matching_subject-$refLocus.txt`. This file will be used
-            later during step 2.5
-        -   if the `frame` value is greater than 0 (i.e. the hit is not
-            in reverse complement), then:
-            -   set the hit into `.bed` format
-            -   retrieve the sequence of the hit using
-                `bedtools getfasta` and rename the sequence in order to
-                have the old locus name separated with ’\_\_’ (double
-                underscore) and the new locus name (`refLocus`) appended
-                at the end of the name
-            -   the hit is saved in `.FNA` (`<hitID>_hit.FNA`)
-        -   if the `frame` value is lower than 0 (i.e. the hit is in
-            reverse complement), then:
-            -   set the hit into `.bed` format
-            -   retrieve the sequence of the hit using
-                `bedtools getfasta`, reverse complement the sequence and
-                rename the sequence in order to have the old locus name
-                separated with ’\_\_’ (double underscore) and the new
-                locus name (`refLocus`) appended at the end of the name
-            -   the hit is saved in `.FNA` (`<hitID>_hit.FNA`)
-        -   copy the hits (`<hitID>_hit.FNA` files) into
-            `$path_to_wd/extracted_hits`
-    -   retrieve the query coverage (i.e. the percentage of query
-        covered by the alignment)
-    -   if the query coverage is lower than 90 (i.e. at least 10% of the
-        TS did not align to any reference), then:
-        -   merge all the `.bed` files to get the region(s) of the TS
-            that did match
-        -   set a `.bed` file for the whole TS
-        -   extract the coordinates of region(s) of the TS that did not
-            match (non-matching regions, NMR) with `bedtools complement`
-        -   retrieve the sequence of the NMR using `bedtools getfasta`,
-            filter out the sequences less than 30 nucleotides long,
-            append ‘NMR’ to their locus name, and store them into
-            `<TS_ID>NMR.FNA`
-        -   copy the NMR (`<TS_ID>NMR.FNA` files) into
-            `$path_to_wd/NMR_hits`
--   else (i.e. the TS has no match):
-    -   rename the TS to ‘nomatch’ and store it into
-        `$path_to_wd/nomatch_TS`
--   set the upper level directory as current directory
+- create a sub-directory and set it as current directory
+- extract the TS from the whole Melasto689_trimmed file
+- align the TS to the reference with `blastx-fast` and store the result
+  into a table
+- if the result table exists and is not empty, then:
+  - filter the results to keep only the matches with a bitscore greater
+    than 50 and a query coverage greater than 50% (meaning at least 50%
+    of the query covers the subject sequence), or matches with
+    percentage identity greater than 60%, a query coverage greater than
+    10%, and a bitscore greater than 50
+- if the filtered table exists and is not empty, then:
+  - for every line in the table (i.e. for every hit):
+    - retrieve the reference locus to which the hit aligns `refLocus`
+    - retrieve the frame in which the hit aligns to the reference
+      `frame`
+    - print the matching subject (i.e. the name of the reference TS to
+      which the hit matched) into the file
+      `matching_subject-$refLocus.txt`. This file will be used later
+      during step 2.5
+    - if the `frame` value is greater than 0 (i.e. the hit is not in
+      reverse complement), then:
+      - set the hit into `.bed` format
+      - retrieve the sequence of the hit using `bedtools getfasta` and
+        rename the sequence in order to have the old locus name
+        separated with ’\_\_’ (double underscore) and the new locus name
+        (`refLocus`) appended at the end of the name
+      - the hit is saved in `.FNA` (`<hitID>_hit.FNA`)
+    - if the `frame` value is lower than 0 (i.e. the hit is in reverse
+      complement), then:
+      - set the hit into `.bed` format
+      - retrieve the sequence of the hit using `bedtools getfasta`,
+        reverse complement the sequence and rename the sequence in order
+        to have the old locus name separated with ’\_\_’ (double
+        underscore) and the new locus name (`refLocus`) appended at the
+        end of the name
+      - the hit is saved in `.FNA` (`<hitID>_hit.FNA`)
+    - copy the hits (`<hitID>_hit.FNA` files) into
+      `$path_to_wd/extracted_hits`
+  - retrieve the query coverage (i.e. the percentage of query covered by
+    the alignment)
+  - if the query coverage is lower than 90 (i.e. at least 10% of the TS
+    did not align to any reference), then:
+    - merge all the `.bed` files to get the region(s) of the TS that did
+      match
+    - set a `.bed` file for the whole TS
+    - extract the coordinates of region(s) of the TS that did not match
+      (non-matching regions, NMR) with `bedtools complement`
+    - retrieve the sequence of the NMR using `bedtools getfasta`, filter
+      out the sequences less than 30 nucleotides long, append ‘NMR’ to
+      their locus name, and store them into `<TS_ID>NMR.FNA`
+    - copy the NMR (`<TS_ID>NMR.FNA` files) into `$path_to_wd/NMR_hits`
+- else (i.e. the TS has no match):
+  - rename the TS to ‘nomatch’ and store it into
+    `$path_to_wd/nomatch_TS`
+- set the upper level directory as current directory
 
 ``` bash
 for TS in $(cat template_sequences_list.txt);
@@ -1118,39 +1110,37 @@ loci_list=$(ls -1 *.FNA | sed 's/.*-//g' | sed 's/_hit.FNA//g' | sort | uniq)
 
 For every `locus` in the list of loci:
 
--   create a subfolder for the locus
--   copy the hits that belong to the locus in the subfolder
--   set the subfolder as current directory
--   retrieve the list of TS belonging to this locus `TS_list`
--   retrieve the list of old loci from the TS belonging to this locus
-    `TS_loci`
--   write the locus and the corresponding old loci list into the table
-    of matching loci
--   extract the sequences corresponding to the locus from the reference
-    set
--   retrieve the names of these sequences and store them into a text
-    file (later used by the
-    [`align_translated_to_ref_and_draw_consensus.R`](scripts/align_translated_to_ref_and_draw_consensus.R)
-    script)
--   for every TS in the `TS_list`:
-    -   retrieve its old locus name `TS_locus`
-    -   retrieve the number of hits belonging to the TS and locus
-        `nb_hits`
-    -   if the number of hits is greater than 1, then:
-        -   concatenate these hits files together and with the reference
-            sequences
-        -   draw a consensus sequence for these hits using the
-            [`align_translated_to_ref_and_draw_consensus.R`](scripts/align_translated_to_ref_and_draw_consensus.R)
-            R script
-        -   remove the gaps from the consensus sequence and rename it so
-            that the old locus name (`TS_locus`) is bordered with ’\_\_’
-            and so that the `-locus` name is at the end of the sequence
-            name
-    -   if the number of hits is equal to 1, then:
-        -   rename the hit sequence so that the `-locus` name is at the
-            end of the sequence name
--   copy the cleaned hits or merged hits into the `cleaned_hits`
--   set the upper level directory as current directory
+- create a subfolder for the locus
+- copy the hits that belong to the locus in the subfolder
+- set the subfolder as current directory
+- retrieve the list of TS belonging to this locus `TS_list`
+- retrieve the list of old loci from the TS belonging to this locus
+  `TS_loci`
+- write the locus and the corresponding old loci list into the table of
+  matching loci
+- extract the sequences corresponding to the locus from the reference
+  set
+- retrieve the names of these sequences and store them into a text file
+  (later used by the
+  [`align_translated_to_ref_and_draw_consensus.R`](scripts/align_translated_to_ref_and_draw_consensus.R)
+  script)
+- for every TS in the `TS_list`:
+  - retrieve its old locus name `TS_locus`
+  - retrieve the number of hits belonging to the TS and locus `nb_hits`
+  - if the number of hits is greater than 1, then:
+    - concatenate these hits files together and with the reference
+      sequences
+    - draw a consensus sequence for these hits using the
+      [`align_translated_to_ref_and_draw_consensus.R`](scripts/align_translated_to_ref_and_draw_consensus.R)
+      R script
+    - remove the gaps from the consensus sequence and rename it so that
+      the old locus name (`TS_locus`) is bordered with ’\_\_’ and so
+      that the `-locus` name is at the end of the sequence name
+  - if the number of hits is equal to 1, then:
+    - rename the hit sequence so that the `-locus` name is at the end of
+      the sequence name
+- copy the cleaned hits or merged hits into the `cleaned_hits`
+- set the upper level directory as current directory
 
 ``` bash
 for locus in $loci_list
@@ -1203,9 +1193,9 @@ Concerning the Angio353 RS, no selection was carried out and all of them
 were appended to the final set, if belonging to a locus present in the
 final set.
 
--   create the `cleaned_sequences_set` folder
--   concatenate all the cleaned hit `.FNA` files into the file
-    `cleaned_hits_all.FNA` in this folder
+- create the `cleaned_sequences_set` folder
+- concatenate all the cleaned hit `.FNA` files into the file
+  `cleaned_hits_all.FNA` in this folder
 
 ``` bash
 cd $path_to_wd/melasto689_on_full_ref/extracted_hits/cleaned_hits
@@ -1213,11 +1203,11 @@ mkdir $path_to_wd/cleaned_sequences_set
 cat *.FNA > $path_to_wd/cleaned_sequences_set/cleaned_hits_all.FNA
 ```
 
--   create the `matching_subjects` subfolder in the
-    `cleaned_sequences_set` folder
--   fetch all the `matching_subject-$refLocus.txt` files and copy them
-    into `$path_to_wd/cleaned_sequences_set/matching_subjects`
--   remove the duplicate lines in every text file
+- create the `matching_subjects` subfolder in the
+  `cleaned_sequences_set` folder
+- fetch all the `matching_subject-$refLocus.txt` files and copy them
+  into `$path_to_wd/cleaned_sequences_set/matching_subjects`
+- remove the duplicate lines in every text file
 
 ``` bash
 cd $path_to_wd/melasto689_on_full_ref
@@ -1232,24 +1222,24 @@ rm *.txt
 rename -v '.txt.temp' '.txt' *
 ```
 
--   retrieve the list of loci from the concatenated clean hits file
--   initialize the `.FNA` file that will contain the final sequences and
-    concatenate cleaned hits in it (`final_sequences_set.FNA`)
--   for every locus in the list of loci:
-    -   retrieve the sequences that belong to this locus in the set of
-        reference and get the number of those sequences that are from
-        the trancriptome data (identified with ‘scaffold’ in their name)
-    -   if the number of these transcriptome sequences is greater than
-        5, then:
-        -   retrieve only the reference sequences that matched a TS in
-            step 2.3 (whose ID are in the `matching_subject-locus.txt`)
-            and append them to `final_sequences_set.FNA`
-        -   retrieve all the reference sequences for this locus that
-            come from Angio353 and if any was retrieved, append them to
-            `final_sequences_set.FNA`
-    -   else (i.e. number of transcriptome sequences is lower than 5):
-        -   retrieve all the reference sequences for this locus and
-            append them to `final_sequences_set.FNA`
+- retrieve the list of loci from the concatenated clean hits file
+- initialize the `.FNA` file that will contain the final sequences and
+  concatenate cleaned hits in it (`final_sequences_set.FNA`)
+- for every locus in the list of loci:
+  - retrieve the sequences that belong to this locus in the set of
+    reference and get the number of those sequences that are from the
+    trancriptome data (identified with ‘scaffold’ in their name)
+  - if the number of these transcriptome sequences is greater than 5,
+    then:
+    - retrieve only the reference sequences that matched a TS in step
+      2.3 (whose ID are in the `matching_subject-locus.txt`) and append
+      them to `final_sequences_set.FNA`
+    - retrieve all the reference sequences for this locus that come from
+      Angio353 and if any was retrieved, append them to
+      `final_sequences_set.FNA`
+  - else (i.e. number of transcriptome sequences is lower than 5):
+    - retrieve all the reference sequences for this locus and append
+      them to `final_sequences_set.FNA`
 
 ``` bash
 cd $path_to_wd/melasto689_on_full_ref/cleaned_sequences_set
@@ -1411,10 +1401,10 @@ clean.
 
 ## 1. Treat the remaining stop codons individually
 
-Some stop codons were found remaining in the Melasto689 TS. We decided
-to assess them one by one. To do so, we aligned all the nucleotide TS
-from a same locus. Unless specified, we replaced the stop codon with the
-consensus sequence at the position of the stop codon.
+Stop codons were found remaining in some TS of the final sequence set.
+We decided to assess them one by one. To do so, we aligned all the
+nucleotide TS from a same locus. Unless specified, we replaced the stop
+codon with the consensus sequence at the position of the stop codon.
 
 Note that other stop codons are present in some reference sequences
 coming from the mega353 dataset. They are treated later (see Step 3:
@@ -1850,10 +1840,10 @@ seqkit grep -w0 -nrf list_TS_to_correct.txt final_sequences_set_TO_CHECK.FNA > T
 seqkit grep -w0 -nrvf list_TS_to_correct.txt final_sequences_set_TO_CHECK.FNA > TS_checked_OK.FNA
 ```
 
-Manually correct `TS_to_correct.FNA` into
-`TS_to_correct_CORRECTED.FNA`: - remove the stop codon and the trailing
-3’ nucleotides - for sequences not multiple of 3, remove the 3’ hanging
-nucleotide(s)
+Manually correct `TS_to_correct.FNA` into `TS_to_correct_CORRECTED.FNA`:
+
+- remove the stop codon and the trailing 3’ nucleotides
+- for sequences not multiple of 3, remove the 3’ hanging nucleotide(s)
 
 All the correction commands are stored in the script
 [`custom_TS_correction.sh`](scripts/custom_TS_correction.sh).
@@ -1872,20 +1862,20 @@ file `list_of_TS_with_low_complexity.txt`. For This step removes the TS
 flagged to present low complexity for a given locus, but only if the
 locus is also represented by other TS (not flagged with low complexity).
 
--   remove duplicates from `list_of_TS_with_low_complexity.txt`
--   retrieve the list of loci for the list of TS
--   initialize the file `TS_with_low_complexity_to_remove.txt`
--   for every locus in `list_of_TS_with_low_complexity.txt`:
-    -   retrieve the full list of TS for this locus
-    -   retrieve the list of TS to remove for this locus (i.e. TS with
-        low complexity)
-    -   retrieve the list of remaining TS (i.e. the full list minus the
-        TS to remove)
-    -   if there are any remaining TS in the list, then:
-        -   append the list of TS to remove to the file
-            `TS_with_low_complexity_to_remove.txt`
--   remove the low complexity TS from the final sequence set using the
-    file `TS_with_low_complexity_to_remove.txt`
+- remove duplicates from `list_of_TS_with_low_complexity.txt`
+- retrieve the list of loci for the list of TS
+- initialize the file `TS_with_low_complexity_to_remove.txt`
+- for every locus in `list_of_TS_with_low_complexity.txt`:
+  - retrieve the full list of TS for this locus
+  - retrieve the list of TS to remove for this locus (i.e. TS with low
+    complexity)
+  - retrieve the list of remaining TS (i.e. the full list minus the TS
+    to remove)
+  - if there are any remaining TS in the list, then:
+    - append the list of TS to remove to the file
+      `TS_with_low_complexity_to_remove.txt`
+- remove the low complexity TS from the final sequence set using the
+  file `TS_with_low_complexity_to_remove.txt`
 
 ``` bash
 dos2unix list_of_TS_with_low_complexity.txt
@@ -1951,32 +1941,32 @@ other program. **The final files are
 
 # References
 
--   Carpenter EJ, Matasci N, Ayyampalayam S, Wu S, Sun J, Yu J,
-    Jimenez Vieira FR, Bowler C, Dorrell RG, Gitzendanner MA, Li L, Du
-    W, K. Ullrich K, Wickett NJ, Barkmann TJ, Barker MS, Leebens-Mack
-    JH, Wong GK-S (2019) Access to RNA-sequencing data from 1,173 plant
-    species: The 1000 Plant transcriptomes initiative (1KP). GigaScience
-    8: giz126. <https://doi.org/10.1093/gigascience/giz126>
--   Jantzen JR, Amarasinghe P, Folk RA, Reginato M, Michelangeli FA,
-    Soltis DE, Cellinese N, Soltis PS (2020) A two-tier bioinformatic
-    pipeline to develop probes for target capture of nuclear loci with
-    applications in Melastomataceae. Applications in Plant Sciences 8:
-    e11345. <https://doi.org/10.1002/aps3.11345>
--   Johnson MG, Pokorny L, Dodsworth S, Botigué LR, Cowan RS, Devault A,
-    Eiserhardt WL, Epitawalage N, Forest F, Kim JT, Leebens-Mack JH,
-    Leitch IJ, Maurin O, Soltis DE, Soltis PS, Wong GK, Baker WJ,
-    Wickett NJ (2019) A Universal Probe Set for Targeted Sequencing of
-    353 Nuclear Genes from Any Flowering Plant Designed Using k-Medoids
-    Clustering. Systematic Biology 68: 594–606.
-    <https://doi.org/10.1093/sysbio/syy086>
--   McLay TGB, Birch JL, Gunn BF, Ning W, Tate JA, Nauheimer L, Joyce
-    EM, Simpson L, Schmidt-Lebuhn AN, Baker WJ, Forest F, Jackson
-    CJ (2021) New targets acquired: Improving locus recovery from the
-    Angiosperms353 probe set. Applications in Plant Sciences 9.
-    <https://doi.org/10.1002/aps3.11420>
--   One Thousand Plant Transcriptomes Initiative (2019) One thousand
-    plant transcriptomes and the phylogenomics of green plants. Nature
-    574: 679–685. <https://doi.org/10.1038/s41586-019-1693-2>
--   Reginato M, Michelangeli FA (2016) Primers for low-copy nuclear
-    genes in the Melastomataceae. Applications in Plant Sciences
-    4: 1500092. <https://doi.org/10.3732/apps.1500092>
+- Carpenter EJ, Matasci N, Ayyampalayam S, Wu S, Sun J, Yu J,
+  Jimenez Vieira FR, Bowler C, Dorrell RG, Gitzendanner MA, Li L, Du W,
+  K. Ullrich K, Wickett NJ, Barkmann TJ, Barker MS, Leebens-Mack JH,
+  Wong GK-S (2019) Access to RNA-sequencing data from 1,173 plant
+  species: The 1000 Plant transcriptomes initiative (1KP). GigaScience
+  8: giz126. <https://doi.org/10.1093/gigascience/giz126>
+- Jantzen JR, Amarasinghe P, Folk RA, Reginato M, Michelangeli FA,
+  Soltis DE, Cellinese N, Soltis PS (2020) A two-tier bioinformatic
+  pipeline to develop probes for target capture of nuclear loci with
+  applications in Melastomataceae. Applications in Plant Sciences 8:
+  e11345. <https://doi.org/10.1002/aps3.11345>
+- Johnson MG, Pokorny L, Dodsworth S, Botigué LR, Cowan RS, Devault A,
+  Eiserhardt WL, Epitawalage N, Forest F, Kim JT, Leebens-Mack JH,
+  Leitch IJ, Maurin O, Soltis DE, Soltis PS, Wong GK, Baker WJ, Wickett
+  NJ (2019) A Universal Probe Set for Targeted Sequencing of 353 Nuclear
+  Genes from Any Flowering Plant Designed Using k-Medoids Clustering.
+  Systematic Biology 68: 594–606.
+  <https://doi.org/10.1093/sysbio/syy086>
+- McLay TGB, Birch JL, Gunn BF, Ning W, Tate JA, Nauheimer L, Joyce EM,
+  Simpson L, Schmidt-Lebuhn AN, Baker WJ, Forest F, Jackson CJ (2021)
+  New targets acquired: Improving locus recovery from the Angiosperms353
+  probe set. Applications in Plant Sciences 9.
+  <https://doi.org/10.1002/aps3.11420>
+- One Thousand Plant Transcriptomes Initiative (2019) One thousand plant
+  transcriptomes and the phylogenomics of green plants. Nature 574:
+  679–685. <https://doi.org/10.1038/s41586-019-1693-2>
+- Reginato M, Michelangeli FA (2016) Primers for low-copy nuclear genes
+  in the Melastomataceae. Applications in Plant Sciences 4: 1500092.
+  <https://doi.org/10.3732/apps.1500092>

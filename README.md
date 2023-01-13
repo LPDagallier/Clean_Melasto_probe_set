@@ -18,9 +18,13 @@ The new and clean probe set is available here:
 [`PROBE_SET_CLEAN_prot.FAA`](CLEAN_PROBE_SET/PROBE_SET_CLEAN_prot.FAA)
 (amino acid version).
 
-The purpose of this clean probe set is to be used **bioinformatically**
-to recover targeted sequences from sequencing reads, but not to
-physically target the sequences in vitro.
+**N.B.** The purpose of this clean probe set is to be used
+bioinformatically to recover targeted sequences from sequencing reads,
+but not to physically target the DNA in vitro.
+
+**Additional note.** It might be interesting to remove short sequences
+from the probe set, e.g. with `hybpiper fix_targetfile`
+(<https://github.com/mossmatters/HybPiper/wiki/Troubleshooting,-common-issues,-and-recommendations#14-fixing-and-filtering-your-target-file>)
 
 ### How to cite
 
