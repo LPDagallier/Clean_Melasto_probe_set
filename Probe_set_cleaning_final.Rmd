@@ -16,9 +16,9 @@ The basic idea of the cleaning process is to build a set of reference sequences 
 
 The process will be divided in 3 main steps:
 
- - [**Step 1**](step-1-build-the-set-of-reference-sequences): build the set of reference sequences  
- - [**Step 2**](Step 2: align the Melasto689 template sequences to the set of reference): align and associate the Melasto689 template sequences to the set of reference into a final sequence set  
- - [**Step 3**](Step 3. Final checks and fine-tuned cleaning): final checks and fine-tuned cleaning: extra steps to make sure the sequences are clean  
+ - [**Step 1**][Step 1: build the set of reference sequences]: build the set of reference sequences  
+ - [**Step 2**][Step 2: align the Melasto689 template sequences to the set of reference]: align and associate the Melasto689 template sequences to the set of reference into a final sequence set  
+ - [**Step 3**][Step 3: Final checks and fine-tuned cleaning]: final checks and fine-tuned cleaning: extra steps to make sure the sequences are clean  
  
  
 **Directory organization.** For simplicity, all the following assumes analyses are run in a single directory `$path_to_wd`. This directory is divided in 6 sub-directory:
@@ -72,7 +72,7 @@ mkdir CLEAN_PROBE_SET
  - **template sequence** (or **TS**): a sequence from the Melasto689 set or final sequence set; in the sequence set, a same locus can have several template sequences
 
 
-# Step 1: build the set of reference sequences 
+# Step 1: build the set of reference sequences
 The set of reference is composed of [mega353](https://doi.org/10.1002/aps3.11420) (that is an extended version of [Angio353](https://doi.org/10.1093/sysbio/syy086)) and the transcriptomes of two Melastomataceae species from the [1KP project](https://sites.google.com/a/ualberta.ca/onekp/?pli=1).
 
 The set of reference sequence will contain different sequences. The sequences will be grouped under different "loci" based on their similarity. During the process of building the set of references, a temporary locus name (sometimes referred as `*locusCustomID*`) will be assigned to the loci in the form `LOC#####` (where `#` represents a digit, e.g. `LOC12345`). This `*locusCustomID*` will be used as locus name for most of the sequences during the whole cleaning process, but the loci names will be reverted to their "old" names (i.e. the names used in Melasto689 and Angio353) in Step 3: 3.
@@ -1019,7 +1019,7 @@ rm final_sequences_set.FNA.
 mv final_sequences_set.FNA.temp final_sequences_set.FNA
 ```
 
-# Step 3. Final checks and fine-tuned cleaning
+# Step 3: Final checks and fine-tuned cleaning
 The final sequence set needs extra steps to make sure the sequences are clean.
 
 ## 1. Treat the remaining stop codons individually

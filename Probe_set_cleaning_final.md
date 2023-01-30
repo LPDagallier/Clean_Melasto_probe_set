@@ -11,14 +11,13 @@ through different checks and fine-tuned cleaning.
 
 The process will be divided in 3 main steps:
 
-- [**Step 1**](step-1-build-the-set-of-reference-sequences): build the
+- [**Step 1**](#step-1-build-the-set-of-reference-sequences): build the
   set of reference sequences  
 - [**Step
-  2**](Step%202:%20align%20the%20Melasto689%20template%20sequences%20to%20the%20set%20of%20reference):
+  2**](#step-2-align-the-melasto689-template-sequences-to-the-set-of-reference):
   align and associate the Melasto689 template sequences to the set of
   reference into a final sequence set  
-- [**Step
-  3**](Step%203.%20Final%20checks%20and%20fine-tuned%20cleaning): final
+- [**Step 3**](#step-3-final-checks-and-fine-tuned-cleaning): final
   checks and fine-tuned cleaning: extra steps to make sure the sequences
   are clean
 
@@ -1399,7 +1398,7 @@ rm final_sequences_set.FNA.
 mv final_sequences_set.FNA.temp final_sequences_set.FNA
 ```
 
-# Step 3. Final checks and fine-tuned cleaning
+# Step 3: Final checks and fine-tuned cleaning
 
 The final sequence set needs extra steps to make sure the sequences are
 clean.
