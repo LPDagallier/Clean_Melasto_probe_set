@@ -16,9 +16,9 @@ The basic idea of the cleaning process is to build a set of reference sequences 
 
 The process will be divided in 3 main steps:
 
- - **Step 1**: build the set of reference sequences  
- - **Step 2**: align and associate the Melasto689 template sequences to the set of reference into a final sequence set  
- - **Step 3**: final checks and fine-tuned cleaning: extra steps to make sure the sequences are clean  
+ - [**Step 1**](step-1-build-the-set-of-reference-sequences): build the set of reference sequences  
+ - [**Step 2**](Step 2: align the Melasto689 template sequences to the set of reference): align and associate the Melasto689 template sequences to the set of reference into a final sequence set  
+ - [**Step 3**](Step 3. Final checks and fine-tuned cleaning): final checks and fine-tuned cleaning: extra steps to make sure the sequences are clean  
  
  
 **Directory organization.** For simplicity, all the following assumes analyses are run in a single directory `$path_to_wd`. This directory is divided in 6 sub-directory:
