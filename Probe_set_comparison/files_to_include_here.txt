@@ -1,6 +1,0 @@
-SraAccList_Tibouchina.csv
-SraAccList_Memecylon.csv
-hybpiper2_assemble_COMP_bwa_old.sh
-hybpiper2_assemble_COMP_bwa_new.sh
-hybpiper2_assemble_COMP_diamond_new.sh
-namelist.txt
