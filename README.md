@@ -6,6 +6,8 @@ Cleaning of the Melastomataceae probe set for target enrichment
 This repository details the cleaning process carried out for the
 Melastomataceae probe set.
 
+See [**An updated and extended version of the Melastomataceae probe set for target capture**](https://doi.org/10.1002/aps3.11564) (Dagallier & Michelangeli 2024).
+
 ### Cleaning process
 
 The cleaning process is detailed [here](Probe_set_cleaning_final.md).
@@ -44,6 +46,6 @@ value.
 
 ### How to cite
 
-> Please cite as:
-> **Dagallier L-PMJ, Michelangeli FA. 2024**. An updated and extended version of the Melastomataceae probe set for target capture. *Applications in Plant Sciences 12*: e11564. [https://doi.org/10.1002/aps3.11564 ](https://doi.org/10.1002/aps3.11564 )
+Please cite as:
+**Dagallier L-PMJ, Michelangeli FA. 2024**. An updated and extended version of the Melastomataceae probe set for target capture. *Applications in Plant Sciences* 12: e11564. [https://doi.org/10.1002/aps3.11564 ](https://doi.org/10.1002/aps3.11564)
 
