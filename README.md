@@ -44,4 +44,6 @@ value.
 
 ### How to cite
 
-> Please cite as: *in prep*
+> Please cite as:
+> **Dagallier L-PMJ, Michelangeli FA. 2024**. An updated and extended version of the Melastomataceae probe set for target capture. *Applications in Plant Sciences 12*: e11564. [https://doi.org/10.1002/aps3.11564 ](https://doi.org/10.1002/aps3.11564 )
+
